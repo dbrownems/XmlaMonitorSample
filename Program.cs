@@ -35,7 +35,7 @@ try
 {
     cmd.ExecuteNonQuery();
 }
-catch (Exception ex) when (ex.Message.Contains("already exists"))
+catch (AdomdErrorResponseException ex) when (ex.Message.Contains("does not exist"))
 {
     Console.Write(ex.Message);
 }
@@ -147,6 +147,7 @@ cmd.CommandText = subscribeCmd;
 
 Task.Run(() =>
 {
+    Console.WriteLine("Waiting for event strem to begin");
     Console.WriteLine("Hit any key to cancel");
     Console.ReadKey();
     cmd.Cancel();
@@ -154,6 +155,7 @@ Task.Run(() =>
 });
 using (AdomdDataReader rdr = cmd.ExecuteReader())
 {
+    Console.WriteLine("Event stream started");
     //var vals = new object[rdr.FieldCount];
     //for (int i = 0; i < rdr.FieldCount; i++)
     //{
@@ -164,8 +166,16 @@ using (AdomdDataReader rdr = cmd.ExecuteReader())
 
     while (rdr.Read())
     {
+        int eventClass = (int)rdr["EventClass"];
+        int eventSubclass = (int)rdr["EventSubclass"];
         //EventClass      EventSubclass   CurrentTime     StartTime       EndTime Duration        CPUTime 
         Console.WriteLine($"{rdr["EventClass"]} {rdr["EventSubclass"]} {rdr["StartTime"]} {rdr["EndTime"]}");
+
+        if (eventClass == 10)
+        {
+            Console.WriteLine(rdr["TextData"]);
+        }
+        
         
     }
 }

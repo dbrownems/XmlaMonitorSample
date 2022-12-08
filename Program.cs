@@ -1,21 +1,12 @@
-﻿using Microsoft.AnalysisServices;
-using Microsoft.AnalysisServices.AdomdClient;
-using System.Xml;
-using System.Xml.Linq;
+﻿using Microsoft.AnalysisServices.AdomdClient;
+
 
 var db = "AdventureWorksCustomerActivityReport";
 var xmlaEndpoint = "powerbi://api.powerbi.com/v1.0/myorg/ReportExportTesting";
 var constr = $"Data Source={xmlaEndpoint};Initial Catalog={db}";
-using var svr = new Microsoft.AnalysisServices.Server();
-
-svr.ServerProperties.Add("Catalog", db);
-svr.Connect(constr);
-svr.Refresh();
-
 
 using var con = new AdomdConnection();
 con.ConnectionString = constr;
-con.SessionID = svr.SessionID;
 con.Open();
 
 var cmd = (AdomdCommand)con.CreateCommand();

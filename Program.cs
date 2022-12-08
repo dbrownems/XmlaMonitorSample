@@ -153,6 +153,7 @@ Task.Run(() =>
     cmd.Cancel();
    
 });
+
 using (AdomdDataReader rdr = cmd.ExecuteReader())
 {
     Console.WriteLine("Event stream started");

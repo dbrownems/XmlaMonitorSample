@@ -1,8 +1,8 @@
 Sample for reading Trace Events from a Power BI Premium XMLA Endpoint using raw XMLA and Adomd.net.
 
-Tracing is also available using AMO and the [Microsoft.AnalysisServices.Tabular.Trace](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.trace?view=analysisservices-dotnet), and a sample tracing utility that uses it here: [Rui Romano's PbiTracer](https://github.com/RuiRomano/pbitracer)
+Tracing is also available using the higher-level AMO API and the [Microsoft.AnalysisServices.Tabular.Trace object](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.trace?view=analysisservices-dotnet), and a sample tracing utility that uses it here: [Rui Romano's PbiTracer](https://github.com/RuiRomano/pbitracer)
 
-To Trace in Power BI you must create a database-scoped trace, and this is acomplished by adding a "Catalog" property to your AdomdCommand, eg
+To Trace using Power BI XMLA endpoint you must create a database-scoped trace, and this is acomplished by adding a "Catalog" property to your AdomdCommand, eg
 
 ```
 var cmd = (AdomdCommand)con.CreateCommand();

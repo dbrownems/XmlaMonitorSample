@@ -1,4 +1,4 @@
-Sample for reading Extended Events from a Power BI Premium XMLA Endpoint
+Sample for reading Trace Events from a Power BI Premium XMLA Endpoint
 
 Power BI Premium XMLA endpoints don't support server-wide tracing, so you have to use a database-scoped trace.  AMO creates server traces, so won't work.  But using Adomd.net you can create and subscribe to the trace. 
 
